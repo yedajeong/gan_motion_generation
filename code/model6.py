@@ -470,20 +470,3 @@ print("전체 모델 저장_json")
 
 loaded_model.save_weights('./history/model6/model6_weight(2).h5')
 # '''
-import numpy as np
-import matplotlib.pyplot as plt
-
-# dataset load
-generated_images = np.load('./history/PREDICTIONS.npy')
-
-# print(generated_images.min())
-# print(generated_images.max())
-
-# sample image
-for x in generated_images:
-    plt.axis("off")
-    plt.imshow(x/255)
-
-    plt.colorbar()
-
-    plt.show()
