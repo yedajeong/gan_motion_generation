@@ -23,7 +23,6 @@
 <br/>
 <br/>
 <br/>
-
 ### 2. Train Model(DCGAN)
 GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시킨 DCGAN 모델을 학습
 
@@ -47,7 +46,6 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
 <br/>
 <br/>
 <br/>
-
 ### 4. Output
 (1가지 class_A009: standing up 에 대한 결과 예시)
 
