@@ -22,7 +22,7 @@
 4) GAN의 input 형태로 만들기 위해 128 by 128 크기의 정방형 이미지로 resizing (interpolation 시 INTER_CUBIC 적용)
 <br/>
 <br/>
-<br/>
+
 ### 2. Train Model(DCGAN)
 GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시킨 DCGAN 모델을 학습
 
@@ -45,7 +45,7 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
   - 128개의 frame을 연속적인 모션으로 시각화
 <br/>
 <br/>
-<br/>
+
 ### 4. Output
 (1가지 class_A009: standing up 에 대한 결과 예시)
 
