@@ -5,6 +5,7 @@
 <br/>
 <br/>
 <br/>
+
 ### 1. Preprocessing
 학습 데이터 셋: NTU-RGB+D action recognition dataset (https://github.com/shahroudy/NTURGB-D)
 
@@ -22,6 +23,7 @@
 <br/>
 <br/>
 <br/>
+
 ### 2. Train Model(DCGAN)
 GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시킨 DCGAN 모델을 학습
 
@@ -37,6 +39,7 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
 <br/>
 <br/>
 <br/>
+
 ### 3. Visualization
   - 학습 및 생성된 정방형 이미지 128 by 128 -> 원래 크기(128 by 25)의 모션 패치로 resizing (interpolation 시 INTER_AREA 적용)
   - matplotlib, Axes3D로 25개의 관절 위치값을 3차원 상의 좌표로 mapping, 연결된 관절 사이는 선으로 연결하여 plotting
@@ -44,15 +47,17 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
 <br/>
 <br/>
 <br/>
+
 ### 4. Output
 (1가지 class_A009: standing up 에 대한 결과 예시)
 
-model loss
+- model loss
 ![image](https://user-images.githubusercontent.com/49023751/207840634-e3bb2cc1-aaad-481c-a595-d05e29cb44a9.png)
 <br/>
 <br/>
 <br/>
-생성 이미지 내의 grid artifact가 나타나는 문제점이 발견되어 이를 제거하고 성능 개선을 위해 전처리시 원점 이동을 추가함
+
+- 생성 이미지 내의 grid artifact가 나타나는 문제점이 발견되어 이를 제거하고 성능 개선을 위해 전처리시 원점 이동을 추가함
 
 (a)원점 이동 전 학습 data
 
@@ -76,7 +81,8 @@ model loss
 <br/>
 <br/>
 <br/>
-시각화 과정
+
+- 시각화 과정
 
 (a)생성된 fake image
 
