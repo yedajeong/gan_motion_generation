@@ -46,25 +46,44 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
 ![image](https://user-images.githubusercontent.com/49023751/207840634-e3bb2cc1-aaad-481c-a595-d05e29cb44a9.png)
 
 
-- (순서대로)(a)원점 이동 전 학습 data (b)grid artifact 제거 전 생성 이미지 (c)grid artifact 제거 후 생성 이미지 (a)로 학습한 이미지 (d)원점 이동 후 학습 data (e)(d)로 학습한 이미지
+- 생성 이미지 내의 grid artifact가 나타나는 문제점이 발견되어 이를 제거하고 성능 개선을 위해 전처리시 원점 이동을 추가함
 
-![image](https://user-images.githubusercontent.com/49023751/207840709-09f27520-e844-445e-9576-c5f31f5122af.png) (a)
+(a)원점 이동 전 학습 data
 
-![image](https://user-images.githubusercontent.com/49023751/207840744-a121c0ea-32f8-452e-882f-5c6c3e314d9f.png) (b)
+![image](https://user-images.githubusercontent.com/49023751/207840709-09f27520-e844-445e-9576-c5f31f5122af.png)
 
-![image](https://user-images.githubusercontent.com/49023751/207840777-59be1b16-bec5-4e9a-acb2-268aa200b903.png) (c)
+(b)grid artifact 제거 전 생성 이미지
 
-![image](https://user-images.githubusercontent.com/49023751/207840808-fa3b5c3b-e21e-4415-8e07-19bff9f2d56a.png) (d)
+![image](https://user-images.githubusercontent.com/49023751/207840744-a121c0ea-32f8-452e-882f-5c6c3e314d9f.png)
 
-![image](https://user-images.githubusercontent.com/49023751/207840836-e24398aa-1802-4cd4-8454-89156fa23da0.png) (d)
+(c)grid artifact 제거 후 생성 이미지 (a)로 학습한 이미지
+
+![image](https://user-images.githubusercontent.com/49023751/207840777-59be1b16-bec5-4e9a-acb2-268aa200b903.png)
+
+(d)원점 이동 후 학습 data 
+
+![image](https://user-images.githubusercontent.com/49023751/207840808-fa3b5c3b-e21e-4415-8e07-19bff9f2d56a.png)
+
+(e)(d)로 학습한 이미지
+
+![image](https://user-images.githubusercontent.com/49023751/207840836-e24398aa-1802-4cd4-8454-89156fa23da0.png)
 
 
-- (a)생성된 fake image (b) (a)를 모션패치화 (c)A009 class의 실제 동작 (d) 생성된 (b)를 모션으로 시각화한 동작
 
-![image](https://user-images.githubusercontent.com/49023751/207840836-e24398aa-1802-4cd4-8454-89156fa23da0.png) (a)
+- 시각화 과정
 
-![image](https://user-images.githubusercontent.com/49023751/207840872-63799ea3-787e-4a6d-ab76-34079ddd2f05.png) (b)
+(a)생성된 fake image
 
-![output_A009](https://user-images.githubusercontent.com/49023751/207840943-469f8f2c-bb0f-4aea-b180-f864fa88e9f9.gif) (c)
+![image](https://user-images.githubusercontent.com/49023751/207840836-e24398aa-1802-4cd4-8454-89156fa23da0.png)
 
-![output_fake_A009(7)](https://user-images.githubusercontent.com/49023751/207840983-ba4d9206-f27b-4373-9290-fd6b76c34d10.gif) (d)
+(b) (a)를 모션패치화 
+
+![image](https://user-images.githubusercontent.com/49023751/207840872-63799ea3-787e-4a6d-ab76-34079ddd2f05.png)
+
+(c)A009 class의 실제 동작 
+
+![output_A009](https://user-images.githubusercontent.com/49023751/207840943-469f8f2c-bb0f-4aea-b180-f864fa88e9f9.gif) 
+
+(d) 생성된 (b)를 모션으로 시각화한 동작
+
+![output_fake_A009(7)](https://user-images.githubusercontent.com/49023751/207840983-ba4d9206-f27b-4373-9290-fd6b76c34d10.gif)
