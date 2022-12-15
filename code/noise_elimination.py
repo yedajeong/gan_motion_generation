@@ -130,7 +130,6 @@ for joint in range(25):
         dif_y = y[frame] - y[frame + 1]
         dif_z = z[frame] - z[frame + 1]
 
-        '''
         if abs(dif_x) > threshold_x[joint] and dif_x > 0:
             new_x.append(x[frame] - threshold_x[joint])
             # print(joint)
@@ -157,64 +156,8 @@ for joint in range(25):
             # print(joint)
         else:
             new_z.append(z[frame + 1])
-        '''
 
-        '''
-        if abs(dif_x) > threshold_x[joint] and dif_x > 0:
-            new_x.append(alpha*(x[frame] - threshold_x[joint]) + real[frame, joint, 0])
-            # print(joint)
-        elif abs(dif_x) > threshold_x[joint] and dif_x < 0:
-            new_x.append(alpha*(x[frame] + threshold_x[joint]) + real[frame, joint, 0])
-            # print(joint)
-        else:
-            new_x.append(alpha*x[frame+1] + real[frame, joint, 0])
-
-        if abs(dif_y) > threshold_y[joint] and dif_y > 0:
-            new_y.append(alpha * (y[frame] - threshold_y[joint]) + real[frame, joint, 1])
-            # print(joint)
-        elif abs(dif_y) > threshold_y[joint] and dif_y < 0:
-            new_y.append(alpha * (y[frame] + threshold_y[joint]) + real[frame, joint, 1])
-            # print(joint)
-        else:
-            new_y.append(alpha * y[frame + 1] + real[frame, joint, 1])
-
-        if abs(dif_z) > threshold_z[joint] and dif_z > 0:
-            new_z.append(alpha * (z[frame] - threshold_z[joint]) + real[frame, joint, 2])
-            # print(joint)
-        elif abs(dif_z) > threshold_z[joint] and dif_z < 0:
-            new_z.append(alpha * (z[frame] + threshold_z[joint]) + real[frame, joint, 2])
-            # print(joint)
-        else:
-            new_z.append(alpha * z[frame + 1] + real[frame, joint, 2])
-        '''
-
-        if abs(dif_x) > threshold_x[joint] and dif_x > 0:
-            new_x.append(((2-alpha)*x[frame] + alpha*real[frame, joint, 0]) / 2 - threshold_x[joint])
-            # print(joint)
-        elif abs(dif_x) > threshold_x[joint] and dif_x < 0:
-            new_x.append(((2-alpha)*x[frame] + alpha*real[frame, joint, 0]) / 2 + threshold_x[joint])
-            # print(joint)
-        else:
-            new_x.append(((2-alpha)*x[frame + 1] + alpha*real[frame + 1, joint, 0]) / 2)
-
-        if abs(dif_y) > threshold_y[joint] and dif_y > 0:
-            new_y.append(((2-alpha)*y[frame] + alpha*real[frame, joint, 1]) / 2 - threshold_y[joint])
-            # print(joint)
-        elif abs(dif_y) > threshold_y[joint] and dif_y < 0:
-            new_y.append(((2-alpha)*y[frame] + alpha*real[frame, joint, 1]) / 2 + threshold_y[joint])
-            # print(joint)
-        else:
-            new_y.append(((2-alpha)*y[frame + 1] + alpha*real[frame + 1, joint, 1]) / 2)
-
-        if abs(dif_z) > threshold_z[joint] and dif_z > 0:
-            new_z.append(((2-alpha)*z[frame] + alpha*real[frame, joint, 2]) / 2 - threshold_z[joint])
-            # print(joint)
-        elif abs(dif_z) > threshold_z[joint] and dif_z < 0:
-            new_z.append(((2-alpha)*z[frame] + alpha*real[frame, joint, 2]) / 2 + threshold_z[joint])
-            # print(joint)
-        else:
-            new_z.append(((2-alpha)*z[frame + 1] + alpha*real[frame + 1, joint, 2]) / 2)
-
+        
     fake_x.append(new_x)
     fake_y.append(new_y)
     fake_z.append(new_z)
