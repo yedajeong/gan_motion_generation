@@ -47,11 +47,11 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
 <br/>
 
 ### 4. Output
-(1가지 class_A009: standing up 에 대한 결과 예시)
+(class_A009: standing up에 대한 결과 예시)
 
 - model loss
-![image](https://user-images.githubusercontent.com/49023751/207840634-e3bb2cc1-aaad-481c-a595-d05e29cb44a9.png)
-<br/>
+<img width=400 src="https://user-images.githubusercontent.com/49023751/207840634-e3bb2cc1-aaad-481c-a595-d05e29cb44a9.png" />
+
 <br/>
 <br/>
 
