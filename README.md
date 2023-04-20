@@ -1,11 +1,15 @@
-# GAN을 이용한 사람 행동 생성
+# gan_motion_generation
+
+🏃🏻‍♀️ GAN을 이용한 사람 행동 생성
 
 ![Python](https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00.svg?&style=for-the-badge&logo=TensorFlow&logoColor=white)
+![Keras](https://img.shields.io/badge/Keras-D00000.svg?&style=for-the-badge&logo=Keras&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8.svg?&style=for-the-badge&logo=OpenCV&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243.svg?&style=for-the-badge&logo=NumPy&logoColor=white)
 ![PyCharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
 
+---
 
 ## Summary
 생성 모델인 GAN을 개선시킨 여러 모델들 중 이미지 생성에 높은 성능을 보이는 DCGAN(Deep Convolutional Generative Adversarial Network)을 사용해 사람의 행동에 해당하는 이미지를 생성한다.  사람의 움직임을 모션 인식 카메라로 촬영 후 frame별로 촬영된 3차원 x, y, z 좌표 상의 관절 위치값이 기록된 파일을 이미지(이를 모션 패치 라고 함)화 시켜 학습에 사용한다. 이미지의 가로 축은 25개의 joint에 해당되고 세로 축은 기록된 프레임에 해당되며 x, y, z값을 각각 R, G, B 값으로 저장되어 하나의 모션 당 한 장의 모션 패치(이미지)로 변환하여 이를 학습하고 유사한 이미지를 생성한다. 생성된 모션 패치는 다시 3d상의 좌표 값으로 mapping되어 움직이는 모션으로 시각화 해 최종적으로 생성된 모션을 확인한다. 모션 생성에 사용된 최종 모델은 'model6' 이다.
@@ -14,7 +18,9 @@
 <br/>
 
 ### 1. Preprocessing
-학습 데이터 셋: NTU-RGB+D action recognition dataset (https://github.com/shahroudy/NTURGB-D)
+학습 데이터 셋: [NTU-RGB+D action recognition dataset][data_link] 
+
+[data_link]: https://github.com/shahroudy/NTURGB-D
 
   - 60개의 액션 class, 1 class 당 948개의 sample
   - 동작 간의 차이가 큰 총 9개의 액션을 선정해 개별 class, 전체 class를 input으로 하여 학습시킴 (총 8532개의 sample 중 missing skeleton 파일 혹은 noise가 포함된 파일을 제외한 8154개의 sample 사용)
