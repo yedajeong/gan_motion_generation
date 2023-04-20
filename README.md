@@ -18,16 +18,17 @@
 <br/>
 
 ### 1. Preprocessing
-학습 데이터 셋: [NTU-RGB+D action recognition dataset][data_link] 
+* 학습 데이터 셋: [NTU-RGB+D action recognition dataset][data_link] 
 
 [data_link]: https://github.com/shahroudy/NTURGB-D
 
-  - 60개의 액션 class, 1 class 당 948개의 sample
-  - 동작 간의 차이가 큰 총 9개의 액션을 선정해 개별 class, 전체 class를 input으로 하여 학습시킴 (총 8532개의 sample 중 missing skeleton 파일 혹은 noise가 포함된 파일을 제외한 8154개의 sample 사용)
-  - data_class9.npy: A009(standing up)
-  - data_class27.npy: A027(jump up)
-  - data_class33.npy: A033(check time from watch)
-  - data.npy: A005(drop), A008(sitting down), A009(standing up), A027(jump up), A031(pointing to something with finger), A033(check time from watch), A038(salute), A039(put the palms together), A040(cross hands in front to say stop)
+* 60개의 액션 class, 1 class 당 948개의 sample
+
+* 동작 간의 차이가 큰 총 9개의 액션을 선정해 개별 class, 전체 class를 input으로 하여 학습시킴 (총 8532개의 sample 중 missing skeleton 파일 혹은 noise가 포함된 파일을 제외한 8154개의 sample 사용)
+  + data_class9.npy: A009(standing up)
+  + data_class27.npy: A027(jump up)
+  + data_class33.npy: A033(check time from watch)
+  + data.npy: A005(drop), A008(sitting down), A009(standing up), A027(jump up), A031(pointing to something with finger), A033(check time from watch), A038(salute), A039(put the palms together), A040(cross hands in front to say stop)
   
 1) 파일 내에 기록된 joint 정보(3D 위치값, depth 정보, 적외선 센서 정보) 중 3D 위치값을 RGB 값으로 저장해 한 동작 당 한 장의 이미지(=모션 패치) 파일로 mapping
 2) 한 동작 class 내의 sample당 촬영된 frame 수가 불일치 -> 최대 frame 수(=128개)에 맞게 늘려 128 frame으로 통일 (이미지 파일의 크기는 가로는 25개의 joint, 세로는 128개의 frame으로 128 by 25 pixels) -> 이를 **모션패치**라 한다.
@@ -39,36 +40,46 @@
 ### 2. Train Model(DCGAN)
 GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시킨 DCGAN 모델을 학습
 
-  - 1가지 class, 4가지 class, 9가지 class에 대한 데이터를 input으로 넣어 학습 진행
-  - generator의 출력층에서 활성 함수로 사용된 tanh 함수의 출력값의 범위에 맞춰 입력 데이터(이미지)의 범위를 [-1, 1] 사이로 정규화
-  - batch size는 64, 128, epoch 수는 50, 100, 150 내에서 조정해가며 학습시켰을 때 가장 생성 이미지의 성능이 좋았던 batch size는 128, epoch은 150
-  - discriminator는 5개, generator는 8개 층 사용
-  - discriminator의 input layer와 generator의 output layer를 제외한 모든 층에 Batch Normalization을 사용
-  - generator의 활성 함수는 ReLU, discriminator의 활성 함수는 Leaky ReLU를 사용
-  - hyper parameter을 조정한 Adam optimizer 사용 (learning rate 0.0002, momentum(=beta1) 0.5로 트레이닝시 가장 안정적)
-  - discriminator에서 작은 random noise값을 label에 더하는 label smoothing을 사용
-  - generator의 deconvolution시 UpSampling2d+Conv2d 와 Conv2dTranspose 함께 사용 (생성 이미지 내의 grid artifact 제거를 위함)
+* 1가지 class, 4가지 class, 9가지 class에 대한 데이터를 input으로 넣어 학습 진행
+
+* generator의 출력층에서 활성 함수로 사용된 tanh 함수의 출력값의 범위에 맞춰 입력 데이터(이미지)의 범위를 [-1, 1] 사이로 정규화
+
+* batch size는 64, 128, epoch 수는 50, 100, 150 내에서 조정해가며 학습시켰을 때 가장 생성 이미지의 성능이 좋았던 batch size는 128, epoch은 150
+
+* discriminator는 5개, generator는 8개 층 사용
+
+* discriminator의 input layer와 generator의 output layer를 제외한 모든 층에 Batch Normalization을 사용
+
+* generator의 활성 함수는 ReLU, discriminator의 활성 함수는 Leaky ReLU를 사용
+
+* hyper parameter을 조정한 Adam optimizer 사용 (learning rate 0.0002, momentum(=beta1) 0.5로 트레이닝시 가장 안정적)
+
+* discriminator에서 작은 random noise값을 label에 더하는 label smoothing을 사용
+
+* generator의 deconvolution시 UpSampling2d+Conv2d 와 Conv2dTranspose 함께 사용 (생성 이미지 내의 grid artifact 제거를 위함)
 <br/>
 <br/>
 <br/>
 
 ### 3. Visualization
-  - 학습 및 생성된 정방형 이미지 128 by 128 -> 원래 크기(128 by 25)의 모션 패치로 resizing (interpolation 시 INTER_AREA 적용)
-  - matplotlib, Axes3D로 25개의 관절 위치값을 3차원 상의 좌표로 mapping, 연결된 관절 사이는 선으로 연결하여 plotting
-  - 128개의 frame을 연속적인 모션으로 시각화
+* 학습 및 생성된 정방형 이미지 128 by 128 -> 원래 크기(128 by 25)의 모션 패치로 resizing (interpolation 시 INTER_AREA 적용)
+
+* matplotlib, Axes3D로 25개의 관절 위치값을 3차원 상의 좌표로 mapping, 연결된 관절 사이는 선으로 연결하여 plotting
+
+* 128개의 frame을 연속적인 모션으로 시각화
 <br/>
 <br/>
 
 ### 4. Output
 (class_A009: standing up에 대한 결과 예시)
 
-- model loss
+* model loss
 <img width=400 src="https://user-images.githubusercontent.com/49023751/207840634-e3bb2cc1-aaad-481c-a595-d05e29cb44a9.png" />
 
 <br/>
 <br/>
 
-- 생성 이미지 내의 grid artifact가 나타나는 문제점이 발견되어 이를 제거하고 성능 개선을 위해 전처리시 원점 이동을 추가함
+* 생성 이미지 내의 grid artifact가 나타나는 문제점이 발견되어 이를 제거하고 성능 개선을 위해 전처리시 원점 이동을 추가함
 
 (a)원점 이동 전 학습 data
 
@@ -93,7 +104,7 @@ GAN의 discriminator, generator의 각 층에 convolutional layer을 적용시�
 <br/>
 <br/>
 
-- 시각화 과정
+* 시각화 과정
 
 (a)생성된 fake image
 
